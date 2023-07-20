@@ -5,4 +5,4 @@ export const increment = () => (dispatch) => {
 
 export const decrement = () => (dispatch) => {
     dispatch({type: ActionType.COUNTER_DECREMENT});
-}
+} 
