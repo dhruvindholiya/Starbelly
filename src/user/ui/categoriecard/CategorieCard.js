@@ -13,7 +13,7 @@ function CategorieCard({to, as, imgPath, title, subTitle}) {
                     <CtgSubTitle>{subTitle}</CtgSubTitle>
                 </CtgInfo>
             </CtgInner>
-        </CtgWrapper>
+        </CtgWrapper> 
     );
 }
 
