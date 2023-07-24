@@ -5,7 +5,7 @@ Version:  1.0
 Author:		Nazar Miller (millerDigitalDesign)
 Portfolio:  https://themeforest.net/user/millerdigitaldesign/portfolio?ref=MillerDigitalDesign
 
-p.s. I am available for Freelance hire (UI design, web development). mail: miller.themes@gmail.com
+p.s. I am available for Freelance hire (.css-hyum1k-MuiToolbar-root design, web development). mail: miller.themes@gmail.com
 
 ------------------------------------------- */
 /*--------------------------------------------
@@ -1969,7 +1969,6 @@ banner
 .sb-banner.sb-banner-with-bg .sb-bg-banner {
   position: absolute;
   top: 0;
-  height: 100vh;
   width: 100%;
 }
 
@@ -1988,7 +1987,6 @@ banner
   padding-top: 13vh;
   display: flex;
   align-items: center;
-  height: 100vh;
 }
 
 .sb-banner .sb-main-title-frame .sb-main-title {
@@ -2529,7 +2527,7 @@ contact
 ***************************/
 .sb-contact-form-frame {
   width: 100%;
-  margin-top: 120px;
+  margin-top: 200px;
   position: relative;
   background-color: #FFFFFF;
   padding: 30px;

@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Divider, ListItem } from "@mui/material";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -93,6 +93,8 @@ const Drawer = styled(MuiDrawer, {
 
 const Layout = ({ children }) => {
     const [open, setOpen] = React.useState(true);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const navigate = useNavigate();
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -103,7 +105,6 @@ const Layout = ({ children }) => {
     };
 
     // Profile ===== 
-    const [anchorEl, setAnchorEl] = React.useState(null);
     const profileOpen = Boolean(anchorEl);
     const handleProfileClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -111,6 +112,11 @@ const Layout = ({ children }) => {
     const handleProfileClose = () => {
         setAnchorEl(null);
     };
+
+    const handleLogout = () => {
+        localStorage.removeItem('sbLoginStatus');
+        navigate('/auth');
+    }
 
     return (
         <Box sx={{ display: "flex" }}>
@@ -130,7 +136,7 @@ const Layout = ({ children }) => {
                             aria-label="open drawer"
                             onClick={handleDrawerOpen}
                             edge="start"
-                            sx={{marginRight: 'auto'}}>
+                            sx={{ marginRight: 'auto' }}>
                             <MenuIcon />
                         </IconButton>
                     )}
@@ -202,7 +208,7 @@ const Layout = ({ children }) => {
                                 </ListItemIcon>
                                 Settings
                             </MenuItem>
-                            <MenuItem onClick={handleProfileClose}>
+                            <MenuItem onClick={handleLogout}>
                                 <ListItemIcon>
                                     <Logout fontSize="small" />
                                 </ListItemIcon>
@@ -227,12 +233,12 @@ const Layout = ({ children }) => {
                     <ListItem disablePadding>
                         <ListItemButton component={Link} to={'/admin/product'}>
                             <ListItemIcon><MenuBookIcon /></ListItemIcon>
-                            <ListItemText className="list_text" primary="Menus" />
+                            <ListItemText className="list_text" primary="Products" />
                         </ListItemButton>
                     </ListItem>
                 </List>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Box component="main" sx={{ flexGrow: 1, px: 3 }}>
                 <DrawerHeader />
                 {children}
             </Box>

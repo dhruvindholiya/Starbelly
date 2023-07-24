@@ -1,29 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-// import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from '@mui/icons-material/Edit';
 import { Button, Divider } from '@mui/material';
 import ProductForm from '../Product/ProductForm';
 import Collapse from '@mui/material/Collapse';
 import DolorIcon from '@mui/icons-material/AttachMoney';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProductData, getProductData, removeProductData, updateProductData } from '../../../user/redux/action/Product.action';
 
-const Menu = () => {
+const Product = () => {
+  const [updateData, setUpdateData] = useState(null);
+  const dispatch = useDispatch();
+  const productVal = useSelector((state) => state.products);
+
+  useEffect(() => {
+    dispatch(getProductData());
+  }, [])
+
+  const handleAddData = (data) => {
+    if (updateData) {
+      dispatch(updateProductData(data))
+    } else {
+      dispatch(addProductData(data));
+    }
+  }
   const handleDelete = (id) => {
-    let l_products = JSON.parse(localStorage.getItem('_products'));
-    let f_products = l_products.filter((v) => v.id !== id);
-    localStorage.setItem('_products', JSON.stringify(f_products));
-  };
+    dispatch(removeProductData(id));
+  }
+  const handleUpdate = (data) => {
+    setUpdateData(data)
+    setFormOpen(true)
+  }
 
   const columns = [
-    { field: 'id', headerName: 'Product ID', flex: 1 },
-    { field: 'name', headerName: 'Product Name', flex: 3 },
-    { field: 'quantity', headerName: 'Quantity', flex: 1 },
-    { field: 'catagory', headerName: 'Category', flex: 2 },
+    { field: 'name', headerName: 'Product Name', flex: 3, cellClassName: 'px-4', headerClassName: 'px-4' },
+    { field: 'catagory', headerName: 'Category', flex: 2, cellClassName: 'px-4', headerClassName: 'px-4' },
+    { field: 'quantity', headerName: 'Quantity', flex: 1, cellClassName: 'px-4', headerClassName: 'px-4' },
     {
       field: 'price',
       headerName: 'Price',
       flex: 1,
+      cellClassName: 'px-4',
+      headerClassName: 'px-4',
       renderCell: (params) => (
         <>
           <DolorIcon sx={{ fontSize: '18px !important' }} />
@@ -31,26 +51,27 @@ const Menu = () => {
         </>
       ),
     },
+    { field: 'cuisine', headerName: 'Cuisine', flex: 1, cellClassName: 'px-4', headerClassName: 'px-4' },
     {
       field: 'action',
       headerName: 'Action',
       flex: 1,
       sortable: false,
       disableColumnMenu: true,
+      cellClassName: 'px-4',
+      headerClassName: 'px-4',
       renderCell: (params) => (
         <>
           <IconButton aria-label="delete" type="button" onClick={() => handleDelete(params.row.id)}>
             <DeleteIcon sx={{ fontSize: '20px' }} />
           </IconButton>
-          {/* <IconButton aria-label="edit" type="button">
-            <EditIcon sx={{ fontSize: '20px' }} />
-          </IconButton> */}
+          <IconButton aria-label="edit" type="button">
+            <EditIcon sx={{ fontSize: '20px' }} onClick={() => handleUpdate(params.row)} />
+          </IconButton>
         </>
       ),
     },
   ];
-
-  let data = JSON.parse(localStorage.getItem('_products'))
 
   const [formOpen, setFormOpen] = React.useState(false);
 
@@ -63,7 +84,7 @@ const Menu = () => {
       <section className='menu_form'>
         <div className='row'>
           <div className='col-12'>
-            <div className='p-4 pt-0 d-flex align-items-center justify-content-between'>
+            <div className='p-4 d-flex align-items-center justify-content-between'>
               <div className='col-auto'>
                 <h4>{!formOpen ? 'PRODUCT LIST' : 'Fill OUT THIS FORM TO ADD A PRODUCT'}</h4>
               </div>
@@ -74,20 +95,26 @@ const Menu = () => {
           </div>
           <div className='col-12'>
             <Collapse in={formOpen} timeout="auto" unmountOnExit>
-              <ProductForm />
+              <ProductForm handleAddData={handleAddData}
+                updateData={updateData}
+                setUpdateData={setUpdateData}
+                setFormOpen={setFormOpen} />
             </Collapse>
           </div>
         </div>
       </section>
       <section className="menu_list">
         <div className='part_block'>
-          <h4 className='p-4'>Product list</h4>
-          <Divider />
-          <div className="p-4 data_table">
-            {data && data.length > 0 ? (
+          {!formOpen ? null :
+            <>
+              <h4 className='p-4'>Product list</h4>
+              <Divider />
+            </>
+          }
+          <div className="data_table">
+            {productVal.products && productVal.products.length > 0 ? (
               <DataGrid
-                className="border-0"
-                rows={data}
+                rows={productVal.products}
                 columns={columns}
                 initialState={{
                   pagination: {
@@ -95,10 +122,12 @@ const Menu = () => {
                   },
                 }}
                 pageSizeOptions={[5, 10]}
-                checkboxSelection
               />
+              // <h1>Hello, user</h1>
             ) : (
-              <p>No data available.</p>
+              <div className='py-3'>
+                <h2 className='text-center' style={{ color: 'rgb(235, 235, 235)', fontWeight: '400' }}>Data not available</h2>
+              </div>
             )}
           </div>
         </div>
@@ -109,4 +138,4 @@ const Menu = () => {
 }
 
 
-export default Menu
+export default Product

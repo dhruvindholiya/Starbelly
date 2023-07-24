@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '../ui/button/Button';
 import CustomLink from '../ui/link/Link';
 
-function Header() {
+function Auth() {
     return (
         <div className="sb-top-bar-frame">
             <div className="sb-top-bar-bg" />
@@ -29,6 +29,7 @@ function Header() {
                         <div className="sb-buttons-frame">
                             <Button to="/reservation" className='me-3' as={Link} text='Reservation'></Button>
                             <Button to="/contact" className='me-3' as={Link} text='Contact'></Button>
+                            <Button to="/auth" className='me-3' as={Link} text='Login'></Button>
                             <div className="sb-btn sb-btn-2 sb-btn-gray sb-btn-icon sb-m-0 sb-btn-cart">
                                 <span className="sb-icon">
                                     <img src="assets/img/ui/icons/cart.svg" alt="icon" />
@@ -174,4 +175,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default Auth;

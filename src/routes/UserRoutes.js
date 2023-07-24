@@ -19,6 +19,7 @@ import Cart from '../user/containers/Cart';
 import Checkout from '../user/containers/Checkout';
 import Contact from '../user/containers/Contact';
 import DiscountPopup from '../user/components/DiscountPopup';
+import Auth from '../user/containers/Auth';
 
 function UserRoutes() {
     return (
@@ -40,6 +41,7 @@ function UserRoutes() {
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/checkout' element={<Checkout />} />
                 <Route path='/contact' element={<Contact />} />
+                <Route path='/auth' element={<Auth />} />
                 <Route path='/*' element={<Error />} />
             </Routes>
             <Footer />
