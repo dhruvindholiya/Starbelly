@@ -13,22 +13,25 @@ function Auth() {
                         <img src="assets/img/ui/logo.svg" alt="Starbelly" />
                     </Link>
                     <div className="sb-right-side">
-                        <nav id="sb-dynamic-menu" className="sb-menu-transition">
+                        <nav id="sb-dynamic-menu" className="sb-menu-transition me-3">
                             <ul className="sb-navigation">
                                 <CustomLink to="/" as={Link} text='Home' />
                                 <CustomLink to="/about" as={Link} text='About Us' />
-                                <CustomLink to="/blog" as={Link} text='Blog' />
-                                <CustomLink to="/publication" as={Link} text='Publication' />
-                                <CustomLink to="/gallery" as={Link} text='Gallery' />
-                                <CustomLink to="/reviews" as={Link} text='Reviews' />
-                                <CustomLink to="/faq" as={Link} text='FAQ' />
                                 <CustomLink to="/menu" as={Link} text='Menu' />
                                 <CustomLink to="/shop" as={Link} text='Shop' />
+                                <CustomLink to="/reviews" as={Link} text='Reviews' />
+                                <CustomLink text='pages'>
+                                    <ul>
+                                        <CustomLink to="/blog" as={Link} text='Blog' />
+                                        <CustomLink to="/publication" as={Link} text='Publication' />
+                                        <CustomLink to="/gallery" as={Link} text='Gallery' />
+                                        <CustomLink to="/faq" as={Link} text='FAQ' />
+                                    </ul>
+                                </CustomLink>
                             </ul>
                         </nav>
                         <div className="sb-buttons-frame">
                             <Button to="/reservation" className='me-3' as={Link} text='Reservation'></Button>
-                            <Button to="/contact" className='me-3' as={Link} text='Contact'></Button>
                             <Button to="/auth" className='me-3' as={Link} text='Login'></Button>
                             <div className="sb-btn sb-btn-2 sb-btn-gray sb-btn-icon sb-m-0 sb-btn-cart">
                                 <span className="sb-icon">
@@ -52,6 +55,8 @@ function Auth() {
                         <li><b>Working hours:</b><span>09:00 - 23:00</span></li>
                         <li><b>Phone:</b><span>+02 (044) 756-X6-52</span></li>
                         <li><b>Email:</b><span>starbelly@mail.com</span></li>
+                        <li className='justify-content-center'>
+                            <Button to="/contact" className='me-3' as={Link} text='Contact'></Button></li>
                     </ul>
                     <div className="sb-ib-title-frame sb-mb-30">
                         <h4>Instagram</h4><i className="fas fa-arrow-down" />
@@ -162,12 +167,8 @@ function Auth() {
                     </Link>
                 </div>
                 <div className="sb-minicart-footer">
-                    <Link to="/cart" className="sb-btn sb-btn-gray sb-btn-text">
-                        <span>View order</span>
-                    </Link>
-                    <Link to="/checkout" className="sb-btn sb-btn-text">
-                        <span>Checkout</span>
-                    </Link>
+                    <Button to="/cart" className='me-3' variant='grayBgBtn' as={Link} text='View order' />
+                    <Button to="/checkout" style={{height:'55px'}} as={Link} text='Checkout' />
                 </div>
             </div>
         </div>

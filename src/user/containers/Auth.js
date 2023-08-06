@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../ui/button/Button';
 
-function Auth(props) {
+function Auth() {
     const [formType, setFormType] = useState('login');
     const handleSubmit = () => {
         localStorage.setItem('sbLoginStatus', JSON.stringify('sbUserActive'))

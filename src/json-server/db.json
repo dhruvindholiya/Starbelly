@@ -1,37 +1,48 @@
 {
   "product": [
     {
+      "name": "Margherita ",
+      "price": 50,
+      "quantity": 200,
+      "cuisine": "Gujrati",
+      "catagory": "Main dishes",
+      "desc": "tomatoes, nori, feta cheese, mushrooms, rice noodles, corn, shrimp.",
+      "image": "C:\\fakepath\\1.jpg",
+      "discount": false,
+      "id": 1
+    },
+    {
       "name": "Sprite",
-      "price": 350,
-      "quantity": 450,
+      "price": 10,
+      "quantity": 400,
       "cuisine": "India",
       "catagory": "Drinks",
-      "desc": "rt",
-      "image": "C:\\fakepath\\11.jpg",
+      "desc": "tomatoes, nori, feta cheese, mushrooms, rice noodles, corn, shrimp.",
+      "image": "C:\\fakepath\\15.jpg",
       "discount": false,
-      "id": 4
+      "id": 2
     },
     {
-      "name": "Dhruvin Dholiya",
-      "price": 34,
-      "quantity": 253,
-      "cuisine": "Gujrati",
-      "catagory": "Starters",
-      "desc": "qwe",
-      "image": "C:\\fakepath\\7.jpg",
-      "discount": false,
-      "id": 5
-    },
-    {
-      "name": "Dhruvin Dholiya",
+      "name": "Barbaque",
       "price": 34,
       "quantity": 450,
-      "cuisine": "India",
+      "cuisine": "Italia",
       "catagory": "Starters",
-      "desc": "qwqw",
-      "image": "C:\\fakepath\\11.jpg",
+      "desc": "tomatoes, nori, feta cheese, mushrooms, rice noodles, corn, shrimp.",
+      "image": "C:\\fakepath\\5.jpg",
       "discount": false,
-      "id": 6
+      "id": 3
+    },
+    {
+      "name": "White Choco",
+      "price": 31,
+      "quantity": 550,
+      "cuisine": "French",
+      "catagory": "Dessert",
+      "desc": "tomatoes, nori, feta cheese, mushrooms, rice noodles, corn, shrimp.",
+      "image": "C:\\fakepath\\4.jpg",
+      "discount": false,
+      "id": 4
     }
   ]
 }

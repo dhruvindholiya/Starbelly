@@ -9,11 +9,13 @@ import Collapse from '@mui/material/Collapse';
 import DolorIcon from '@mui/icons-material/AttachMoney';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProductData, getProductData, removeProductData, updateProductData } from '../../../user/redux/action/Product.action';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Product = () => {
   const [updateData, setUpdateData] = useState(null);
   const dispatch = useDispatch();
   const productVal = useSelector((state) => state.products);
+  console.log(productVal.products);
 
   useEffect(() => {
     dispatch(getProductData());
@@ -81,57 +83,62 @@ const Product = () => {
 
   return (
     <>
-      <section className='menu_form'>
-        <div className='row'>
-          <div className='col-12'>
-            <div className='p-4 d-flex align-items-center justify-content-between'>
-              <div className='col-auto'>
-                <h4>{!formOpen ? 'PRODUCT LIST' : 'Fill OUT THIS FORM TO ADD A PRODUCT'}</h4>
-              </div>
-              <div className='col-auto'>
-                <Button type="submit" onClick={handleFormOpen} className='yellow_btn text-capitalize' variant="contained">Add Product</Button>
-              </div>
-            </div>
-          </div>
-          <div className='col-12'>
-            <Collapse in={formOpen} timeout="auto" unmountOnExit>
-              <ProductForm handleAddData={handleAddData}
-                updateData={updateData}
-                setUpdateData={setUpdateData}
-                setFormOpen={setFormOpen} />
-            </Collapse>
-          </div>
-        </div>
-      </section>
-      <section className="menu_list">
-        <div className='part_block'>
-          {!formOpen ? null :
+      {
+        productVal.loading ?
+          <div style={{height: 'calc(100vh - 64px'}} className='d-flex align-items-center justify-content-center'>
+            <CircularProgress />
+          </div> :
+          productVal.error ?
+            <h2>{productVal.error}</h2> :
             <>
-              <h4 className='p-4'>Product list</h4>
-              <Divider />
+              <section className='menu_form'>
+                <div className='row'>
+                  <div className='col-12'>
+                    <div className='p-4 d-flex align-items-center justify-content-between'>
+                      <div className='col-auto'>
+                        <h4>{!formOpen ? 'PRODUCT LIST' : 'Fill OUT THIS FORM TO ADD A PRODUCT'}</h4>
+                      </div>
+                      <div className='col-auto'>
+                        <Button type="submit" onClick={handleFormOpen} className='yellow_btn text-capitalize' variant="contained">Add Product</Button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <Collapse in={formOpen} timeout="auto" unmountOnExit>
+                      <ProductForm handleAddData={handleAddData}
+                        updateData={updateData}
+                        setUpdateData={setUpdateData}
+                        setFormOpen={setFormOpen} />
+                    </Collapse>
+                  </div>
+                </div>
+              </section>
+              <section className="menu_list">
+                <div className='part_block'>
+                  {!formOpen ? null :
+                    <>
+                      <h4 className='p-4'>Product list</h4>
+                      <Divider />
+                    </>
+                  }
+                  <div className="data_table">
+                    <DataGrid
+                      rows={productVal.products}
+                      columns={columns}
+                      initialState={{
+                        pagination: {
+                          paginationModel: { page: 0, pageSize: 5 },
+                        },
+                      }}
+                      pageSizeOptions={[5, 10]}
+                      checkboxSelection
+                    />
+                    {/* <h1>Hello</h1> */}
+                  </div>
+                </div>
+              </section>
             </>
-          }
-          <div className="data_table">
-            {productVal.products && productVal.products.length > 0 ? (
-              <DataGrid
-                rows={productVal.products}
-                columns={columns}
-                initialState={{
-                  pagination: {
-                    paginationModel: { page: 0, pageSize: 5 },
-                  },
-                }}
-                pageSizeOptions={[5, 10]}
-              />
-              // <h1>Hello, user</h1>
-            ) : (
-              <div className='py-3'>
-                <h2 className='text-center' style={{ color: 'rgb(235, 235, 235)', fontWeight: '400' }}>Data not available</h2>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
+      }
     </>
 
   );
@@ -139,3 +146,6 @@ const Product = () => {
 
 
 export default Product
+
+
+

@@ -6,12 +6,24 @@ const initState = {
 }
 
 export const productsReducer = (state = initState, action) => {
-    console.log(action)
     switch (action.type) {
+        case ActionType.PRODUCT_LOADER:
+            return {
+                products: [],
+                loading: action.payload,
+                error: null
+            }
+        case ActionType.PRODUCT_ERROR:
+            return {
+                products: [],
+                loading: false,
+                error: action.payload
+            }
         case ActionType.PRODUCT_GET:
             return {
-                ...state,
-                products: action.payload
+                products: action.payload,
+                loading: false,
+                error: null
             }
         case ActionType.PRODUCT_ADD:
             return {
@@ -27,7 +39,7 @@ export const productsReducer = (state = initState, action) => {
             return {
                 ...state,
                 products: state.products.map((val) => {
-                    if(val.id === action.payload.id) {
+                    if (val.id === action.payload.id) {
                         return action.payload
                     } else {
                         return val

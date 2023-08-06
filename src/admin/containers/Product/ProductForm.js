@@ -27,6 +27,7 @@ function ProductForm({ handleAddData, updateData, setFormOpen, setUpdateData }) 
         formik.resetForm();
         setSelectedImage(null);
         setFormOpen(false);
+        setUpdateData(null);
     }
 
     const validation = Yup.object({

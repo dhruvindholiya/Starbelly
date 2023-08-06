@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, LinkWrapper } from './Link.style';
 
-function CustomLink({text, ...rest }) {
+function CustomLink({ text, children, ...rest }) {
     return (
         <LinkWrapper>
-            <Link {...rest}>{text}</Link>
+            <Link {...rest}>{text}{children}</Link>
         </LinkWrapper>
     );
 }

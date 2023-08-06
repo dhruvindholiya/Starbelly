@@ -1,0 +1,5 @@
+export const MENU_ALL = 'All menu'
+export const MENU_STARTERS = 'Starters'
+export const MENU_MAIN_DISHES = 'Main dishes'
+export const MENU_DRINKS = 'Drinks'
+export const MENU_DESSERT = 'Dessert'
